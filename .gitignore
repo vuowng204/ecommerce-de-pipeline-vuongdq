@@ -1,0 +1,56 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+#credentials files
+*.json
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.toml
+profiles.yml
+
+# dlt
+.dlt/
+pipeline_state/
+
+# dbt
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+dbt_project/.user.yml
+
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/.terraform.lock.hcl
+infra/crash.log
+infra/*.tfvars
+!infra/*.tfvars.example
+
+# Airflow
+airflow.db
+airflow.cfg
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+
+# others
+admin-aws-login.txt

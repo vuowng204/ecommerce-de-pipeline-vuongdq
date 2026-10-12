@@ -1,0 +1,7 @@
+aws_region            = "ap-southeast-1"
+project_name          = "ecommerce-de"
+environment           = "dev"
+account_id            = "YOUR_AWS_ACCOUNT_ID"
+my_ip_cidr            = "YOUR_PUBLIC_IP/32"
+redshift_admin_username = "admin"
+redshift_base_rpu     = 8
