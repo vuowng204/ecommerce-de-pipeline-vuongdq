@@ -22,3 +22,9 @@
   --base-capacity 8 \
   --config-parameters parameterKey=autoPause,parameterValue=true \
                      parameterKey=autoPauseDelay,parameterValue=300
+5. Cài đặt faker để tạo dữ liệu mẫu
+    uv add --group dev faker
+6. Xóa docker-compose và volumes
+    docker compose -f docker/docker-compose.yml down -v
+7. Chạy lệnh sql trong postgres-docker
+    docker exec ecommerce-postgres psql -U admin -d shop -c  " sql-here"

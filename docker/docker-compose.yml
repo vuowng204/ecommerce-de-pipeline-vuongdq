@@ -1,0 +1,45 @@
+volumes:
+  postgres-data:
+
+
+services: 
+  postgres:
+    image: postgres:16-alpine 
+    container_name: ecommerce-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_DB: ${POSTGRES_DB:-shop}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro #tự động chạy file .sql trong docker/postgres/init/
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER-admin} -d ${POSTGRES_DB-shop}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical" #ghi thêm thông tin logic — "row nào, cột nào, giá trị cũ → giá trị mới" — để có thể đọc hiểu từng thay đổi ở mức bảng/dòng để dùng cho dlt khôi phục khi crash, và để replication.
+      - "-c"
+      - "max_wal_senders=10"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: ecommerce-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    
+
+
