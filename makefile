@@ -55,3 +55,5 @@ tf-apply:
 
 tf-destroy:
 	cd infra && terraform destroy
+ingest:
+	uv run python ingestion/pipeline.py

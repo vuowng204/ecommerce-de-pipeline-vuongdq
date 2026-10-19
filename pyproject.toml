@@ -8,8 +8,10 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "dlt[duckdb,postgres,redshift,s3,sql-database]>=1.31.0",
     "pandas>=3.0.6",
     "psycopg2-binary>=2.9.13",
+    "psycopg[binary]>=3.3.6",
     "pyarrow>=26.0.0",
     "python-dotenv>=1.2.4",
 ]
@@ -18,6 +20,7 @@ dependencies = [
 dev = [
     "faker>=40.43.0",
     "kaggle>=2.2.4",
+    "pgcli>=4.6.0",
 ]
 
 #[project.scripts]

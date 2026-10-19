@@ -56,3 +56,5 @@ logs/
 admin-aws-login.txt
 # Dataset CSV
 data/
+#dlt secrets
+.dlt/
