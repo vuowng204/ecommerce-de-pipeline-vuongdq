@@ -13,7 +13,7 @@ resource "aws_secretsmanager_secret" "redshift_admin" {
   tags = {
     Name = "${var.project_name}-redshift-admin-secret"
     Environment = var.environment
-    RedshiftQueryEditor = "true"
+    RedshiftQueryEditor = "true" # tag này để connect vào redshift query , cho phep connect bằng secretsmanager nếu không có sẽ không tìm thấy trong phần aws secretsmanager khi connect
   }
 }
 
