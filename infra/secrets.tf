@@ -10,6 +10,11 @@ resource "aws_secretsmanager_secret" "redshift_admin" {
   description = "Redshift admin credentials"
   // xóa secret khi không còn dùng tránh lỗi secret đã tồn tại khi destroy và apply  lại 
   recovery_window_in_days = 0
+  tags = {
+    Name = "${var.project_name}-redshift-admin-secret"
+    Environment = var.environment
+    RedshiftQueryEditor = "true" # tag này để connect vào redshift query , cho phep connect bằng secretsmanager nếu không có sẽ không tìm thấy trong phần aws secretsmanager khi connect
+  }
 }
 
 resource "aws_secretsmanager_secret_version" "redshift_admin" {

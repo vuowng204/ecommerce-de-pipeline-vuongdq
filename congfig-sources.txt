@@ -28,3 +28,12 @@
     docker compose -f docker/docker-compose.yml down -v
 7. Chạy lệnh sql trong postgres-docker
     docker exec ecommerce-postgres psql -U admin -d shop -c  " sql-here"
+8. lấy key for aws 
+    at ~/.aws/credentials
+9. Lấy giá trị host, password cho redshift
+    aws secretsmanager get-secret-value --secret-id ecommerce-de-pipeline/redshift/admin --query SecretString --output text | jq
+10. Thêm các thư viện dlt
+    uv add "dlt[sql_database,postgres,redshift,duckdb]"
+11. Cai PSQL
+    sudo apt update
+    sudo apt install -y postgresql-client
