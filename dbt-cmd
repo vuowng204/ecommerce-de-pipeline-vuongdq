@@ -1,0 +1,2 @@
+1. Lệnh cài đặt  package được khai báo  
+    uv  run  dbt deps
