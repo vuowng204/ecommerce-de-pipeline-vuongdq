@@ -36,5 +36,5 @@ variable "redshift_admin_username" {
 variable "redshift_base_rpu" {
   description = "Base RPU capacity (8, 16, 32, ...)"
   type        = number
-  default     = 8
+  default     = 4
 }
