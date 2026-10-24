@@ -1,10 +1,10 @@
 WITH items AS (
-    slect * FROM {{ ref('stg_olist__order_items') }}
+    select * FROM {{ ref('stg_olist__order_items') }}
 ),
-product AS (
+products AS (
     SELECT * FROM {{ ref('stg_olist__products') }}
 ),
-seller AS (
+sellers AS (
     SELECT * FROM {{ ref('stg_olist__sellers') }}
 ),
 category_translation AS (
@@ -16,10 +16,10 @@ joined AS (
         i.order_item_id,
         i.product_id,
         p.product_category_name,
-        COALESCE(ct.product_category_name_english,'SAN PHAM KHONG CO TEN TIENG ANH') AS product_category_name_english,
+        COALESCE(ct.product_category_name_english,'SAN PHAM KHONG CO TEN TIENG ANH') AS product_category_name_en,
         i.seller_id,
         s.seller_state,
-        s.seller_city
+        s.seller_city,
         i.shipping_limit_date,
         i.price AS item_price,
         i.freight_value,

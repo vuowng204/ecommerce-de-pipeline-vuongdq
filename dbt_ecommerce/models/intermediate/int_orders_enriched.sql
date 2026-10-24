@@ -5,7 +5,12 @@ payments AS (
     SELECT * FROM {{ ref('int_payments_pivoted_to_orders') }}
 ),
 reviews AS (
-    SELECT * FROM {{ ref('stg_olist__order_reviews') }}
+    SELECT
+        order_id,
+        AVG(review_score) AS review_score,
+        COUNT(review_id) AS review_count
+    FROM {{ ref('stg_olist__order_reviews') }}
+    GROUP BY order_id
 ),
 items_agg AS (
     SELECT
