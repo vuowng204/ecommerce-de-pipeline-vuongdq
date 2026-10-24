@@ -46,3 +46,5 @@
     uv add --group transform dbt-redshift
 13. Lấy aws profile
     aws configure list-profiles
+14. ping đến aws
+    nc -zv ecommerce-de-pipeline-wg.<awsid>.ap-southeast-1.redshift-serverless.amazonaws.com 5439

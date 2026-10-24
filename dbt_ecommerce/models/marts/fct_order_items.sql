@@ -1,13 +1,16 @@
 WITH items AS (
-    SELECT * FROM {{ ref('int_order_items_enriched') }}
+    SELECT * 
+    FROM {{ ref('int_order_items_enriched') }}
 ),
 
 orders AS (
-    SELECT * FROM {{ ref('int_orders_enriched') }}
+    SELECT * 
+    FROM {{ ref('int_orders_enriched') }}
 ),
 
 customers AS (
-    SELECT * FROM {{ ref('stg_olist__customers') }}
+    SELECT * 
+    FROM {{ ref('stg_olist__customers') }}
 ),
 
 final AS (
@@ -34,5 +37,5 @@ final AS (
     LEFT JOIN orders o ON i.order_id = o.order_id
     LEFT JOIN customers c ON o.customer_id = c.customer_id
 )
-
 SELECT * FROM final
+

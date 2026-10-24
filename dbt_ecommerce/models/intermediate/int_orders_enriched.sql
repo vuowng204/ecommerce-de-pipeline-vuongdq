@@ -60,6 +60,5 @@ joined AS (
     LEFT JOIN payments AS p ON p.order_id = o.order_id
     LEFT JOIN items_agg AS i ON i.order_id = o.order_id
     LEFT JOIN reviews AS r ON r.order_id = o.order_id
-    LIMIT 100
 )
 SELECT * FROM joined
