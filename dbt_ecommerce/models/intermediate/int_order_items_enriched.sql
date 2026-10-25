@@ -16,7 +16,7 @@ joined AS (
         i.order_item_id,
         i.product_id,
         p.product_category_name,
-        COALESCE(ct.product_category_name_english,'SAN PHAM KHONG CO TEN TIENG ANH') AS product_category_name_en,
+        COALESCE(ct.product_category_name_english,p.product_category_name) AS product_category_name_en,
         i.seller_id,
         s.seller_state,
         s.seller_city,
