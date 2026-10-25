@@ -1,0 +1,138 @@
+version: 2
+
+
+sources:
+  - name: olist
+    schema: raw_olist
+    tables:
+      - name: customers
+        description: "Thông tin chi tiết về khách hàng và địa chỉ định danh của họ."
+        columns:
+          - name: customer_id
+            description: "Mã định danh duy nhất của khách hàng cho mỗi đơn hàng (Key chính để liên kết với bảng orders)."
+          - name: customer_unique_id
+            description: "Mã định danh thực sự của khách hàng (1 khách hàng có thể mua nhiều lần và có nhiều customer_id khác nhau)."
+          - name: customer_zip_code_prefix
+            description: "5 chữ số đầu của mã bưu chính nơi khách hàng sinh sống."
+          - name: customer_city
+            description: "Tên thành phố của khách hàng."
+          - name: customer_state
+            description: "Tên bang của khách hàng (ví dụ: SP, RJ, MG)."
+      - name: geolocation
+        description: "Danh sách các mã bưu chính kèm theo tọa độ địa lý (vĩ độ, kinh độ)."
+        columns:
+          - name: geolocation_zip_code_prefix
+            description: "5 chữ số đầu của mã bưu chính."
+          - name: geolocation_lat
+            description: "Vĩ độ (Latitude) tương ứng với mã bưu chính."
+          - name: geolocation_lng
+            description: "Kinh độ (Longitude) tương ứng với mã bưu chính."
+          - name: geolocation_city
+            description: "Tên thành phố."
+          - name: geolocation_state
+            description: "Tên bang."
+      - name: orders
+        description: "Bảng cốt lõi chứa trạng thái và các mốc thời gian vòng đời của đơn hàng."
+        columns:
+          - name: order_id
+            description: "Mã định danh duy nhất của đơn hàng (Khóa chính)."
+          - name: customer_id
+            description: "Mã định danh khách hàng đặt đơn này (Khóa ngoại nối với bảng customers)."
+          - name: order_status
+            description: "Trạng thái đơn hàng (delivered, canceled, shipped, processing, invoiced, approved, unavailable, created)."
+          - name: order_purchase_timestamp
+            description: "Thời điểm khách hàng bấm đặt mua hàng."
+          - name: order_approved_at
+            description: "Thời điểm thanh toán đơn hàng được hệ thống phê duyệt."
+          - name: order_delivered_carrier_date
+            description: "Thời điểm đơn hàng được bàn giao cho đối tác vận chuyển (carrier)."
+          - name: order_delivered_customer_date
+            description: "Thời điểm thực tế khách hàng nhận được hàng."
+          - name: order_estimated_delivery_date
+            description: "Ngày dự kiến giao hàng ban đầu báo cho khách hàng khi đặt mua."
+      - name: order_items
+        description: "Chi tiết từng sản phẩm (item) có trong mỗi đơn hàng."
+        columns:
+          - name: order_id
+            description: "Mã định danh đơn hàng (Khóa ngoại liên kết với bảng orders)."
+          - name: order_item_id
+            description: "Số thứ tự tuần tự của sản phẩm trong cùng một đơn hàng (1, 2, 3... nếu đơn có nhiều món)."
+          - name: product_id
+            description: "Mã định danh sản phẩm (Khóa ngoại liên kết với bảng products)."
+          - name: seller_id
+            description: "Mã định danh người bán hàng cung cấp sản phẩm này."
+          - name: shipping_limit_date
+            description: "Hạn chót để người bán giao hàng cho bên vận chuyển."
+          - name: price
+            description: "Giá gốc của sản phẩm."
+          - name: freight_value
+            description: "Tiền phí vận chuyển tính riêng cho sản phẩm này."
+      - name: order_payments
+        description: "Thông tin về phương thức và giá trị thanh toán của đơn hàng."
+        columns:
+          - name: order_id
+            description: "Mã định danh đơn hàng."
+          - name: payment_sequential
+            description: "Thứ tự thanh toán nếu đơn hàng sử dụng nhiều hình thức (ví dụ: trả góp nhiều thẻ)."
+          - name: payment_type
+            description: "Phương thức thanh toán (credit_card, boleto, voucher, debit_card)."
+          - name: payment_installments
+            description: "Số kỳ hạn trả góp (nếu thanh toán bằng thẻ tín dụng)."
+          - name: payment_value
+            description: "Số tiền thanh toán cho phương thức này."
+      - name: order_reviews
+        description: "Thông tin đánh giá (feedback/review) của khách hàng về đơn hàng."
+        columns:
+          - name: review_id
+            description: "Mã định danh của bản đánh giá."
+          - name: order_id
+            description: "Mã định danh đơn hàng được đánh giá."
+          - name: review_score
+            description: "Điểm đánh giá từ khách hàng (thang điểm từ 1 đến 5 sao)."
+          - name: review_comment_title
+            description: "Tiêu đề của bình luận đánh giá."
+          - name: review_comment_message
+            description: "Nội dung chi tiết bình luận của khách hàng."
+          - name: review_creation_date
+            description: "Thời điểm bản đánh giá được tạo/gửi đi."
+          - name: review_answer_timestamp
+            description: "Thời điểm Olist phản hồi lại đánh giá của khách hàng."
+      - name: products
+        description: "Thông tin chi tiết về đặc tính vật lý của sản phẩm (kích thước, cân nặng)."
+        columns:
+          - name: product_id
+            description: "Mã định danh duy nhất của sản phẩm (Khóa chính)."
+          - name: product_category_name
+            description: "Tên danh mục của sản phẩm (tiếng Bồ Đào Nha)."
+          - name: product_name_lenght
+            description: "Độ dài ký tự của tên sản phẩm."
+          - name: product_description_lenght
+            description: "Độ dài ký tự của phần mô tả sản phẩm."
+          - name: product_photos_qty
+            description: "Số lượng hình ảnh sản phẩm được đăng tải."
+          - name: product_weight_g
+            description: "Trọng lượng sản phẩm tính bằng gram."
+          - name: product_length_cm
+            description: "Chiều dài sản phẩm tính bằng cm."
+          - name: product_height_cm
+            description: "Chiều cao sản phẩm tính bằng cm."
+          - name: product_width_cm
+            description: "Chiều rộng sản phẩm tính bằng cm."
+      - name: sellers
+        description: "Thông tin về các nhà bán hàng (sellers) tham gia sàn thương mại điện tử Olist."
+        columns:
+          - name: seller_id
+            description: "Mã định danh duy nhất của người bán hàng (Khóa chính)."
+          - name: seller_zip_code_prefix
+            description: "5 chữ số đầu mã bưu chính nơi người bán đặt trụ sở."
+          - name: seller_city
+            description: "Thành phố của người bán."
+          - name: seller_state
+            description: "Bang của người bán."
+      - name: product_category_name_translation
+        description: "Bảng ánh xạ dịch nghĩa tên danh mục sản phẩm từ tiếng Bồ Đào Nha sang tiếng Anh."
+        columns:
+          - name: product_category_name
+            description: "Tên danh mục sản phẩm gốc bằng tiếng Bồ Đào Nha."
+          - name: product_category_name_english
+            description: "Tên danh mục sản phẩm đã được dịch sang tiếng Anh."

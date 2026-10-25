@@ -22,6 +22,9 @@ dev = [
     "kaggle>=2.2.4",
     "pgcli>=4.6.0",
 ]
+transform = [
+    "dbt-redshift>=1.11.1",
+]
 
 #[project.scripts]
 #ecommerce-de-pipeline-vuongdq = "ecommerce_de_pipeline_vuongdq:main"

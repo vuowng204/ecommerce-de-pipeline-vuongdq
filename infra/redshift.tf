@@ -36,3 +36,11 @@ data "aws_subnets" "default" {
     values = [data.aws_vpc.default.id]
   }
 }
+
+resource "aws_redshiftserverless_usage_limit" "daily_limit" {
+  resource_arn = aws_redshiftserverless_workgroup.this.arn
+  usage_type   = "serverless-compute"
+  amount       = 6
+  period       = "daily"
+  breach_action = "log"
+}
