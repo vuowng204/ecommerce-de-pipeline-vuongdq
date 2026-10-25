@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: mart_daily_revenue
+    description: >
+      Bảng Mart tổng hợp các chỉ số kinh doanh theo từng ngày (Daily Revenue & Orders Mart). 
+      Dữ liệu được lọc bỏ các đơn hàng có trạng thái 'canceled' (đã hủy) và 'unavailable' (không có sẵn).
+      Cung cấp các số liệu quan trọng phục vụ Executive Dashboard gồm: Tổng số đơn hàng, 
+      Tổng doanh thu (Revenue), Tổng giá trị hàng hóa (GMV), Phí vận chuyển, Giá trị trung bình đơn hàng (AOV) 
+      và Điểm đánh giá trung bình của khách hàng.
+    columns:
+      - name: order_date
+        description: "Ngày đặt hàng (trục thời gian chính cho các biểu đồ chuỗi thời gian)."
+      - name: total_orders
+        description: "Tổng số lượng đơn hàng duy nhất trong ngày (không tính đơn hủy)."
+      - name: total_revenue
+        description: "Tổng giá trị thanh toán thực tế thu về từ khách hàng trong ngày."
+      - name: total_gmv
+        description: "Tổng giá trị hàng hóa (GMV) bán ra trước khi trừ chiết khấu/phí."
+      - name: total_freight
+        description: "Tổng chi phí vận chuyển phát sinh trong ngày."
+      - name: avg_order_value
+        description: "Giá trị trung bình của mỗi đơn hàng (AOV) trong ngày."
+      - name: avg_review_score
+        description: "Điểm đánh giá trung bình từ phía khách hàng trong ngày."
+  - name: mart_seller_performance
+    description: >
+      Bảng Mart tổng hợp hiệu suất kinh doanh theo từng nhà bán hàng (Seller Performance Mart). 
+      Cung cấp các số liệu quan trọng phục vụ phân tích báo cáo gồm: Tổng số lượng đơn hàng duy nhất, 
+      tổng doanh thu, tổng cước phí vận chuyển, giá trung bình sản phẩm, điểm review trung bình 
+      và số lượng đơn hàng bị hủy của từng seller.
+    columns:
+      - name: seller_sk
+        description: "Khóa nhân tạo (Surrogate Key) của nhà bán hàng."
+      - name: seller_state
+        description: "Tỉnh thành/bang nơi nhà bán hàng đăng ký hoạt động."
+      - name: total_orders
+        description: "Tổng số lượng đơn hàng duy nhất (distinct order_id) mà seller này đã thực hiện."
+      - name: total_revenue
+        description: "Tổng doanh thu (tổng giá trị sản phẩm bán ra) của seller."
+      - name: total_freight
+        description: "Tổng chi phí vận chuyển phát sinh từ các đơn hàng của seller."
+      - name: avg_item_price
+        description: "Giá bán trung bình của các sản phẩm do seller cung cấp."
+      - name: avg_review_score
+        description: "Điểm đánh giá trung bình từ khách hàng cho các sản phẩm/đơn hàng của seller."
+      - name: canceled_orders
+        description: "Tổng số lượng đơn hàng bị trạng thái 'canceled' của seller này."
+
+version: 2
+
+models:
+  - name: mart_product_performance 
+    description: >
+      Bảng Mart tổng hợp hiệu suất kinh doanh theo từng sản phẩm (Product Performance Mart). 
+      Cung cấp các số liệu quan trọng bao gồm: Tổng số đơn hàng chứa sản phẩm, tổng số lượng đơn vị bán ra, 
+      tổng doanh thu, giá bán trung bình (ASP) và điểm đánh giá trung bình từ phía khách hàng.
+    columns:
+      - name: product_sk
+        description: "Khóa nhân tạo (Surrogate Key) của sản phẩm."
+      - name: product_category_name
+        description: "Tên danh mục sản phẩm gốc (tiếng Bồ Đào Nha)."
+      - name: product_category_name_en
+        description: "Tên danh mục sản phẩm được dịch sang tiếng Anh."
+      - name: total_orders
+        description: "Tổng số lượng đơn hàng duy nhất có chứa sản phẩm này."
+      - name: total_units_sold
+        description: "Tổng số lượng sản phẩm (units) đã bán ra."
+      - name: total_revenue
+        description: "Tổng doanh thu thu về từ sản phẩm này."
+      - name: avg_selling_price
+        description: "Giá bán trung bình (Average Selling Price - ASP) của sản phẩm."
+      - name: avg_review_score
+        description: "Điểm đánh giá trung bình của sản phẩm dựa trên các review từ khách hàng."

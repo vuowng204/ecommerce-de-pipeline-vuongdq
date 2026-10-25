@@ -3,12 +3,12 @@ WITH orders AS (
 )
 SELECT
     order_date,
-    COUNT(DISTINCT order_id) AS total_orders,
-    SUM(total_payment_value) AS total_revenue,
-    SUM(total_item_value) AS total_gmv,
-    SUM(total_freight_value) AS total_freight,
-    AVG(total_payment_value) AS avg_order_value,
-    AVG(review_score) AS avg_review_score
+    COALESCE(COUNT(DISTINCT order_id),0) AS total_orders,
+    COALESCE(SUM(total_payment_value),0) AS total_revenue,
+    COALESCE(SUM(total_item_value),0) AS total_gmv,
+    COALESCE(SUM(total_freight_value),0) AS total_freight,
+    COALESCE(AVG(total_payment_value),0) AS avg_order_value,
+    COALESCE(AVG(review_score),0) AS avg_review_score
 FROM orders
 WHERE order_status NOT IN ('canceled', 'unavailable')
 GROUP BY order_date

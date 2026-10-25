@@ -21,9 +21,9 @@ joined AS (
         s.seller_state,
         s.seller_city,
         i.shipping_limit_date,
-        i.price AS item_price,
-        i.freight_value,
-        i.price + i.freight_value AS total_item_value
+        COALESCE(i.price,0) AS item_price,
+        COALESCE(i.freight_value,0) AS freight_value,
+        COALESCE(i.price + i.freight_value,0) AS total_item_value
     FROM items i
     LEFT JOIN products p ON i.product_id = p.product_id
     LEFT JOIN category_translation ct ON p.product_category_name = ct.product_category_name
