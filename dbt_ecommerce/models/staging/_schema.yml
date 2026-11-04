@@ -62,7 +62,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - order_id
-            - payment_id
+            - payment_sequential
     columns:
       - name: order_id
         tests:
