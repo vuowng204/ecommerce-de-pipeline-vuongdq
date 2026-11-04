@@ -48,3 +48,9 @@
     aws configure list-profiles
 14. ping đến aws
     nc -zv ecommerce-de-pipeline-wg.<awsid>.ap-southeast-1.redshift-serverless.amazonaws.com 5439
+15. tạo database cho airflow
+    docker exec -it ecommerce-postgres psql -U shop -d shop -c "CREATE DATABASE airflow;"   
+16.bulid airflow
+   cd docker && docker compose -f docker-compose.airflow.yml --env-file ../.env up -d --build
+17. copy file env từ bên ngoài vào trong thư mục docker 
+    cd docker && ln -s ../.env .env

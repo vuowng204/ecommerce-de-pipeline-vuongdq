@@ -5,39 +5,43 @@ models:
     description: "Dimension khách hàng - grain: customer_unique_id"
     columns:
       - name: customer_sk
-        tests: [unique, not_null]
+        tests: [ unique, not_null ]
       - name: customer_unique_id
-        tests: [unique, not_null]
+        tests: [ unique, not_null ]
 
   - name: dim_products
     description: "Dimension sản phẩm"
     columns:
       - name: product_sk
-        tests: [unique, not_null]
+        tests: [ unique, not_null ]
       - name: product_id
-        tests: [unique, not_null]
+        tests: [ unique, not_null ]
 
   - name: dim_sellers
     description: "Dimension người bán"
     columns:
       - name: seller_sk
-        tests: [unique, not_null]
+        tests: [ unique, not_null ]
 
   - name: dim_date
     description: "Date spine 2016-2019"
     columns:
       - name: date_day
-        tests: [unique, not_null]
+        tests: [ unique, not_null ]
 
   - name: fct_orders
     description: "Fact đơn hàng - grain: order_id"
     columns:
       - name: order_sk
         description: "Khóa thay thế của đơn hàng, được tạo từ order_id."
-        tests: [unique, not_null]
+        tests:
+          - unique
+          - not_null
       - name: order_id
         description: "Mã định danh đơn hàng."
-        tests: [unique, not_null]
+        tests:
+          - unique
+          - not_null
       - name: customer_sk
         description: "Khóa thay thế của khách hàng, được tạo từ customer_unique_id để liên kết với dim_customers."
       - name: order_date
@@ -47,8 +51,15 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['delivered', 'shipped', 'canceled', 'unavailable',
-                       'invoiced', 'processing', 'created', 'approved']
+              values:
+                - approved
+                - canceled
+                - created
+                - delivered
+                - invoiced
+                - processing
+                - shipped
+                - unavailable
       - name: approval_hours
         description: "Số giờ từ khi đặt hàng đến khi đơn hàng được phê duyệt, theo cách tính của model intermediate."
       - name: total_payment_value
@@ -85,13 +96,14 @@ models:
           - dbt_utils.accepted_range:
               min_value: 1
               max_value: 5
+        description: Số điểm đánh giá cho từng đơn hàng
 
   - name: fct_order_items
     description: "Fact chi tiết món hàng - grain: order_id + order_item_id"
     columns:
       - name: order_item_sk
         description: "Khóa thay thế của dòng sản phẩm, được tạo từ order_id và order_item_id."
-        tests: [unique, not_null]
+        tests: [ unique, not_null ]
       - name: order_id
         tests:
           - not_null

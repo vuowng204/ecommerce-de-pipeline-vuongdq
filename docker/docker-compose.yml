@@ -27,7 +27,8 @@ services:
       - "wal_level=logical" #ghi thêm thông tin logic — "row nào, cột nào, giá trị cũ → giá trị mới" — để có thể đọc hiểu từng thay đổi ở mức bảng/dòng để dùng cho dlt khôi phục khi crash, và để replication.
       - "-c"
       - "max_wal_senders=10"
-
+    networks:
+      - ecommerce-net
   pgadmin:
     image: dpage/pgadmin4
     container_name: ecommerce-pgadmin
@@ -40,6 +41,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    
+    networks:
+      - ecommerce-net
 
-
+networks:
+  ecommerce-net:
+    name: ecommerce-net

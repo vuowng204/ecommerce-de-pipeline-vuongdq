@@ -28,6 +28,23 @@ def build_pipeline() -> dlt.Pipeline:
         dataset_name="raw_olist", # Schema đích trên Redshift
         dev_mode=False,  # Tắt dev_mode để không tự xóa schema khi chạy lại 
     )
+# def build_pipeline() -> dlt.Pipeline:
+#     """Khởi tạo dlt pipeline với S3 staging và Redshift destination."""
+#     pipeline = dlt.pipeline(
+#         pipeline_name="ecommerce-de-pipiline",
+#         destination="redshift",
+#         staging="filesystem",
+#         dataset_name="raw_olist",
+#         dev_mode=False,
+#     )
+    
+#     # Xóa state cũ nếu có (chống lỗi FileExistsError)
+#     try:
+#         pipeline.drop()
+#     except Exception:
+#         pass  # Không có state cũ → bỏ qua
+    
+#     return pipeline
 
 # Hàm lấy dữ liệu từ postgress
 def get_postgres_source():

@@ -57,3 +57,12 @@ tf-destroy:
 	cd infra && terraform destroy
 ingest:
 	uv run python ingestion/pipeline.py
+
+flowu:
+	cd docker && docker compose -f docker-compose.airflow.yml up -d --build
+
+flowd:
+	cd docker && docker compose -f docker-compose.airflow.yml down
+
+airflow-logs:
+	cd docker && docker compose -f docker-compose.airflow.yml logs -f
