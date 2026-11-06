@@ -9,7 +9,7 @@ Pipeline ELT phân tích dữ liệu thương mại điện tử Olist. Dự án
 
 Luồng chính được thiết kế để có thể chạy độc lập từ command line. Dự án cũng có DAG Airflow cho điều phối định kỳ và script hỗ trợ nạp bộ dữ liệu CSV vào PostgreSQL.
 <p align="center">
-  <img src="assets/Untitled Diagram.jpg" alt="Kiến trúc tổng thể" width="800">
+  <img src="assets/Ảnh kiến trúc tổng thể.png" alt="Kiến trúc tổng thể" width="800">
 </p>
 
 ## Kiến trúc
