@@ -1,0 +1,15 @@
+dbt_ecommerce:
+  outputs:
+    dev:
+      type: redshift
+      method: iam
+      # Đọc từ biến môi trường, có giá trị dự phòng nếu biến môi trường trống
+      host: "{{ env_var('REDSHIFT_HOST', 'your-redshift-endpoint.amazonaws.com') }}"
+      port: 5439
+      dbname: "{{ env_var('REDSHIFT_DBNAME', 'dev') }}"
+      user: "{{ env_var('REDSHIFT_USER', 'admin') }}"
+      schema: "{{ env_var('REDSHIFT_SCHEMA', 'raw_olist') }}"
+      threads: 4
+      query_group: "dbt_dev"
+      region: "{{ env_var('AWS_DEFAULT_REGION', 'ap-southeast-1') }}"  
+ target: dev
