@@ -11,6 +11,7 @@ Luồng chính được thiết kế để có thể chạy độc lập từ co
 <p align="center">
   <img src="assets/Untitled Diagram.jpg" alt="Kiến trúc tổng thể" width="800">
 </p>
+
 ## Kiến trúc
 
 ```text
