@@ -59,10 +59,12 @@ ingest:
 	uv run python ingestion/pipeline.py
 
 flowu:
-	cd docker && docker compose -f docker-compose.airflow.yml up -d --build
+	cd airflow-local && docker compose --env-file ../.env up -d
 
 flowd:
-	cd docker && docker compose -f docker-compose.airflow.yml down
-
-airflow-logs:
-	cd docker && docker compose -f docker-compose.airflow.yml logs -f
+	cd airflow-local && docker compose down
+redshift-pass:
+	aws secretsmanager get-secret-value \
+  --secret-id ecommerce-de-pipeline/redshift/admin \
+  --query SecretString --output text \
+  | python3 -c "import sys,json; d=json.loads(sys.stdin.read()); print(d['password'])"

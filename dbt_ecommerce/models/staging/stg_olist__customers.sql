@@ -1,6 +1,5 @@
 with source as (
     SELECT * FROM {{ source('olist','customers') }}
-    limit 5
 ),
 renamed as(
     SELECT

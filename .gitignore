@@ -23,6 +23,9 @@ profiles.yml
 
 # dlt
 .dlt/
+!.dlt/
+.dlt/*
+!.dlt/secrets.toml.example
 pipeline_state/
 
 # dbt
@@ -57,4 +60,4 @@ admin-aws-login.txt
 # Dataset CSV
 data/
 #dlt secrets
-.dlt/
+secrets.toml

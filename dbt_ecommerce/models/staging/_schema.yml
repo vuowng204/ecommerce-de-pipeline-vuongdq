@@ -14,11 +14,13 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['delivered', 'shipped', 'canceled', 'unavailable',
-                       'invoiced', 'processing', 'created', 'approved']
+              arguments:
+                values: ['delivered', 'shipped', 'canceled', 'unavailable',
+                         'invoiced', 'processing', 'created', 'approved']
       - name: order_purchase_timestamp
         tests:
           - not_null
+
   - name: stg_olist__customers
     columns:
       - name: customer_id
@@ -29,50 +31,59 @@ models:
   - name: stg_olist__order_items
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - order_id
-            - order_item_id
+          arguments:
+            combination_of_columns:
+              - order_id
+              - order_item_id
     columns:
       - name: product_id
         tests:
           - not_null
           - relationships:
-              to: ref('stg_olist__products')
-              field: product_id
+              arguments:
+                to: ref('stg_olist__products')
+                field: product_id
       - name: seller_id
         tests:
           - not_null
           - relationships:
-              to: ref('stg_olist__sellers')
-              field: seller_id
+              arguments:
+                to: ref('stg_olist__sellers')
+                field: seller_id
       - name: price
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: 0
-              inclusive: true
+              arguments:
+                min_value: 0
+                inclusive: true
       - name: freight_value
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: 0
-              inclusive: true
+              arguments:
+                min_value: 0
+                inclusive: true
+
   - name: stg_olist__order_payments
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - order_id
-            - payment_sequential
+          arguments:
+            combination_of_columns:
+              - order_id
+              - payment_sequential
     columns:
       - name: order_id
         tests:
           - not_null
           - relationships:
-              to: ref('stg_olist__orders')
-              field: order_id
+              arguments:
+                to: ref('stg_olist__orders')
+                field: order_id
       - name: payment_value
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: 0
-              inclusive: true
+              arguments:
+                min_value: 0
+                inclusive: true

@@ -44,6 +44,12 @@ models:
           - not_null
       - name: customer_sk
         description: "Khóa thay thế của khách hàng, được tạo từ customer_unique_id để liên kết với dim_customers."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
       - name: order_date
         description: "Ngày đặt hàng, lấy phần ngày từ thời điểm order_purchase_timestamp đã được ép kiểu về DATE."
       - name: order_status
@@ -51,15 +57,16 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values:
-                - approved
-                - canceled
-                - created
-                - delivered
-                - invoiced
-                - processing
-                - shipped
-                - unavailable
+              arguments:
+                values:
+                  - approved
+                  - canceled
+                  - created
+                  - delivered
+                  - invoiced
+                  - processing
+                  - shipped
+                  - unavailable
       - name: approval_hours
         description: "Số giờ từ khi đặt hàng đến khi đơn hàng được phê duyệt, theo cách tính của model intermediate."
       - name: total_payment_value
@@ -67,8 +74,9 @@ models:
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: 0
-              inclusive: true
+              arguments:
+                min_value: 0
+                inclusive: true
       - name: payment_count
         description: "Số bản ghi thanh toán được ghi nhận cho đơn hàng."
       - name: max_installments
@@ -92,11 +100,12 @@ models:
       - name: total_freight_value
         description: "Tổng phí vận chuyển của các sản phẩm trong đơn hàng."
       - name: review_score
+        description: Số điểm đánh giá cho từng đơn hàng
         tests:
           - dbt_utils.accepted_range:
-              min_value: 1
-              max_value: 5
-        description: Số điểm đánh giá cho từng đơn hàng
+              arguments:
+                min_value: 1
+                max_value: 5
 
   - name: fct_order_items
     description: "Fact chi tiết món hàng - grain: order_id + order_item_id"
@@ -108,26 +117,30 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('fct_orders')
-              field: order_id
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
       - name: product_sk
         tests:
           - not_null
           - relationships:
-              to: ref('dim_products')
-              field: product_sk
+              arguments:
+                to: ref('dim_products')
+                field: product_sk
       - name: seller_sk
         tests:
           - not_null
           - relationships:
-              to: ref('dim_sellers')
-              field: seller_sk
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_sk
       - name: item_price
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: 0
-              inclusive: true
+              arguments:
+                min_value: 0
+                inclusive: true
       - name: order_date
         description: "Ngày đặt hàng, lấy phần ngày từ thời điểm đặt hàng của đơn."
       - name: product_category_name
