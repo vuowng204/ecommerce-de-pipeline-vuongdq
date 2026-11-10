@@ -47,8 +47,6 @@ models:
       - name: canceled_orders
         description: "Tổng số lượng đơn hàng bị trạng thái 'canceled' của seller này."
 
-version: 2
-
 models:
   - name: mart_product_performance 
     description: >
