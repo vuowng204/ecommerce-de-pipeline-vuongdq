@@ -58,6 +58,6 @@ logs/
 # others
 admin-aws-login.txt
 # Dataset CSV
-data/
+# data/
 #dlt secrets
 secrets.toml
