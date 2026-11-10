@@ -14,8 +14,8 @@ Luồng chính được thiết kế để có thể chạy độc lập từ co
 
 ## Dashboard with MetaBase
 <p align="center">
-  <img src="assets/Metabase_-_Báo_cáo_tổng_quát-1.png"800">
-  <img src="assets/Metabase_-_Báo_cáo_tổng_quát-2.png"800">
+  <img src="assets/Metabase_-_Báo_cáo_tổng_quát-1.png" width="800">
+  <img src="assets/Metabase_-_Báo_cáo_tổng_quát-2.png" width="800">
 </p>
 
 ## Kiến trúc
