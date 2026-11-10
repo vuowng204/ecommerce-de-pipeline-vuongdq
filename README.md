@@ -8,15 +8,16 @@
 Pipeline ELT phân tích dữ liệu thương mại điện tử Olist. Dự án sử dụng **dlt** để trích xuất dữ liệu từ PostgreSQL, staging dữ liệu trên Amazon S3 và nạp vào **Amazon Redshift**; sau đó **dbt Core** cùng `dbt-redshift` chuẩn hóa, mô hình hóa và kiểm thử dữ liệu ngay trong warehouse.
 
 Luồng chính được thiết kế để có thể chạy độc lập từ command line. Dự án cũng có DAG Airflow cho điều phối định kỳ và script hỗ trợ nạp bộ dữ liệu CSV vào PostgreSQL.
-<p align="center">
-  <img src="assets/Ảnh kiến trúc.svg" alt="Kiến trúc tổng thể" width="800">
-</p>
+<div align="center">
+  <img src="assets/Ảnh%20kiến%20trúc.svg" alt="Kiến trúc tổng thể" width="800">
+</div>
 
 ## Dashboard with MetaBase
-<p align="center">
+
+<div align="center">
   <img src="assets/Metabase_-_Báo_cáo_tổng_quát-1.png" width="800">
   <img src="assets/Metabase_-_Báo_cáo_tổng_quát-2.png" width="800">
-</p>
+</div>
 
 ## Kiến trúc
 
